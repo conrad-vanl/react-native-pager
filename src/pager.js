@@ -37,6 +37,7 @@ class Pager extends PureComponent {
         {renderPage()}
       </Animated.View>
     ),
+    windowSize: 1,
   }
 
   constructor(...args) {
@@ -50,7 +51,7 @@ class Pager extends PureComponent {
 
   /**
    * Sets this.position to auto-track the current page index of the list view
-   * Only needs to be ran when this.data or this.horizontal changes
+   * Only needs to be ran when props.data or props.horizontal changes
    */
   setupPositionTracking({ data, horizontal }) {
     const numPages = (data && data.length) || 0;
@@ -70,6 +71,14 @@ class Pager extends PureComponent {
       duration: 0,
     }).start();
   }
+
+  useInternalFlatListInstanceMethod = methodName => (...args) => (
+    (this.list && this.list[methodName]) ? this.list[methodName](...args) : null
+  )
+
+  scrollToEnd = this.useInternalFlatListInstanceMethod('scrollToEnd');
+  scrollToIndex = this.useInternalFlatListInstanceMethod('scrollToIndex');
+  scrollToOffset = this.useInternalFlatListInstanceMethod('scrollToOffset');
 
   layoutWidth = new Animated.Value(window.width);
   layoutHeight = new Animated.Value(window.height);
@@ -101,6 +110,7 @@ class Pager extends PureComponent {
 
     const pageProps = {
       page: item,
+      index,
       position: this.position,
       active,
       layout: { width: this.layoutWidth, height: this.layoutHeight },
@@ -116,6 +126,7 @@ class Pager extends PureComponent {
     return (
       <FlatList
         {...this.props}
+        ref={(ref) => { this.list = ref; }}
         renderItem={this.renderItem}
         onLayout={this.handleLayout}
         onScroll={this.handleScroll}
