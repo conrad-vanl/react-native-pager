@@ -5,6 +5,7 @@ import { View, Text } from 'react-native';
 
 import Pager from '../src/pager';
 import AnimatedValues from './animated-values';
+import Peeking from './peeking';
 
 const style = {
   flex: 1,
@@ -45,6 +46,9 @@ storiesOf('Vertical Paging')
   ))
   .add('Animated Values', () => (
     <AnimatedValues data={longList} />
+  ))
+  .add('Peeking', () => (
+    <Peeking data={shortList} />
   ));
 
 storiesOf('Horizontal Paging')
