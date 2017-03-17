@@ -4,6 +4,7 @@ import { storiesOf } from '@kadira/react-native-storybook';
 import { View, Text } from 'react-native';
 
 import Pager from '../src/pager';
+import AnimatedValues from './animated-values';
 
 const style = {
   flex: 1,
@@ -41,6 +42,9 @@ storiesOf('Vertical Paging')
         <Card><Text>{page}</Text></Card>
       )}
     />
+  ))
+  .add('Animated Values', () => (
+    <AnimatedValues data={longList} />
   ));
 
 storiesOf('Horizontal Paging')
@@ -62,4 +66,7 @@ storiesOf('Horizontal Paging')
         <Card><Text>{page}</Text></Card>
       )}
     />
+  ))
+  .add('Animated Values', () => (
+    <AnimatedValues horizontal data={longList} />
   ));
