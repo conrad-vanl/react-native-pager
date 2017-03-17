@@ -8,7 +8,7 @@
 	},
 	"dependencies": {
 		"react": "~16.0.0-alpha.3",
-		"react-native": "0.43.0-rc.0"
+		"react-native": "0.43.0-rc.3"
 	},
 	"devDependencies": {
 		"@kadira/react-native-storybook": "^2.2.0",
